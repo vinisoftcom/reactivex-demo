@@ -19,11 +19,11 @@ abstract class BaseActivity : FragmentActivity() {
         validationInput?.let {
             EMAIL_PUBLISHING_SUBJECT.onNext(it.inputText)
             if (!it.isValid) {
-                validationResult.text = getString(R.string.is_not_valid)
+                searchLayout.error = getString(R.string.is_not_valid)
             } else if (!it.isAvailable) {
-                validationResult.text = getString(R.string.is_not_available)
+                searchLayout.error = getString(R.string.is_not_available)
             } else {
-                validationResult.text = getString(R.string.is_ok)
+                searchLayout.error = getString(R.string.is_ok)
             }
         }
     }
