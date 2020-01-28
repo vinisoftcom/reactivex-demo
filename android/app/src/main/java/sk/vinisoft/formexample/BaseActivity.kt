@@ -1,10 +1,11 @@
 package sk.vinisoft.formexample
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.activity_common_ui.*
+import sk.vinisoft.formexample.MainActivity.Companion.EMAIL_PUBLISHING_SUBJECT
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : FragmentActivity() {
 
     val emailRegistrationService = AsyncEmailRegistrationService()
     val emailValidationService = AsyncEmailValidationService()
@@ -16,6 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun handleResult(validationInput: InputValidation?) {
         validationInput?.let {
+            EMAIL_PUBLISHING_SUBJECT.onNext(it.inputText)
             if (!it.isValid) {
                 validationResult.text = getString(R.string.is_not_valid)
             } else if (!it.isAvailable) {

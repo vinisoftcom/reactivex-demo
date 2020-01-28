@@ -13,7 +13,7 @@ class AsyncReactiveActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        disposable = searchInput.textChanges().debounce(DELAY, TimeUnit.MILLISECONDS)
+        disposable = searchInput.textChanges().debounce(DELAY, TimeUnit.MILLISECONDS).filter { it.isNotBlank() }
             .map { input -> InputValidation(input.toString()) }
             .flatMap { validationInput ->
                 emailValidationService.getObservable(validationInput)

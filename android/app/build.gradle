@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager:3.1.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager2:3.1.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
