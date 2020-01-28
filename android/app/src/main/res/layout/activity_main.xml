@@ -24,4 +24,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reactive" />
 
+    <Button
+        android:id="@+id/asyncreactive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/reactiveAsync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nonreactive" />
+
+    <Button
+        android:id="@+id/asyncnonreactive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nonreactiveAcync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asyncreactive" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

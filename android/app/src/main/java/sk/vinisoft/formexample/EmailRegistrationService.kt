@@ -1,6 +1,6 @@
 package sk.vinisoft.formexample
 
-class EmailRegistrationService {
+open class EmailRegistrationService {
 
     fun isEmailFree(email: String): Boolean {
         return !USED_EMAILS.contains(email)

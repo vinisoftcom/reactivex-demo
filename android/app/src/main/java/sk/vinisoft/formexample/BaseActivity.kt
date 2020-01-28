@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_common_ui.*
 
-abstract class SyncActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
-    val emailRegistrationService = EmailRegistrationService()
-    val emailValidationService = EmailValidationService()
+    val emailRegistrationService = AsyncEmailRegistrationService()
+    val emailValidationService = AsyncEmailValidationService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +25,6 @@ abstract class SyncActivity : AppCompatActivity() {
             }
         }
     }
-
-    data class InputValidation(
-        val inputText: String,
-        val isValid: Boolean = false,
-        val isAvailable: Boolean = false
-    )
 
     companion object {
         val DELAY = 1000L

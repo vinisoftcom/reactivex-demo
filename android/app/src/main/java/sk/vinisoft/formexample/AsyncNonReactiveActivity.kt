@@ -1,15 +1,13 @@
 package sk.vinisoft.formexample
 
-import android.os.AsyncTask
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.activity_common_ui.*
 import java.util.*
 
-
-class NonReactiveActivity : BaseActivity() {
-
+class AsyncNonReactiveActivity : BaseActivity() {
     private var timer: Timer? = null
-    private var asyncTask: IsEmailFreeTask? = null
+    private var asyncValidationTask: InternalValidationTask? = null
+    private var asyncRegistrationTask: InternalRegisterationTask? = null
 
     override fun onResume() {
         super.onResume()
@@ -21,8 +19,8 @@ class NonReactiveActivity : BaseActivity() {
                 schedule(object : TimerTask() {
                     override fun run() {
                         cancelTask()
-                        asyncTask = IsEmailFreeTask().apply {
-                            execute(searched)
+                        asyncValidationTask = InternalValidationTask().apply {
+                            execute(InputValidation(searched))
                         }
                     }
                 }, DELAY)
@@ -31,7 +29,10 @@ class NonReactiveActivity : BaseActivity() {
     }
 
     private fun cancelTask() {
-        asyncTask?.apply {
+        asyncValidationTask?.apply {
+            cancel(true)
+        }
+        asyncRegistrationTask?.apply {
             cancel(true)
         }
     }
@@ -47,20 +48,21 @@ class NonReactiveActivity : BaseActivity() {
         super.onPause()
     }
 
-    private inner class IsEmailFreeTask : AsyncTask<String, Void, InputValidation?>() {
-        override fun doInBackground(vararg params: String?): InputValidation? {
-            return params[0]?.let {
-                InputValidation(
-                    it,
-                    emailValidationService.isEmailValid(it),
-                    emailRegistrationService.isEmailFree(it)
-                )
-            }
-        }
 
+    inner class InternalValidationTask : AsyncEmailValidationTask() {
         override fun onPostExecute(result: InputValidation?) {
             super.onPostExecute(result)
-            result?.let { handleResult(it) }
+            asyncRegistrationTask = InternalRegisterationTask().apply {
+                execute(result)
+            }
         }
     }
+
+    inner class InternalRegisterationTask : AsyncEmailRegistrationTask() {
+        override fun onPostExecute(result: InputValidation?) {
+            super.onPostExecute(result)
+            handleResult(result)
+        }
+    }
+
 }

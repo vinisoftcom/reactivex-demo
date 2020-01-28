@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_common_ui.*
 import java.util.concurrent.TimeUnit
 
-class ReactiveActivity : BaseActivity() {
+class AsyncReactiveActivity : BaseActivity() {
 
     private var disposable: Disposable? = null
 
@@ -15,17 +15,11 @@ class ReactiveActivity : BaseActivity() {
         super.onResume()
         disposable = searchInput.textChanges().debounce(DELAY, TimeUnit.MILLISECONDS)
             .map { input -> InputValidation(input.toString()) }
-            .map { validationInput ->
-                validationInput.copy(
-                    inputText = validationInput.inputText,
-                    isValid = emailValidationService.isEmailValid(validationInput.inputText)
-                )
+            .flatMap { validationInput ->
+                emailValidationService.getObservable(validationInput)
             }
-            .map { validationInput ->
-                validationInput.copy(
-                    inputText = validationInput.inputText,
-                    isAvailable = emailRegistrationService.isEmailFree(validationInput.inputText)
-                )
+            .flatMap { validationInput ->
+                emailRegistrationService.getObservable(validationInput)
             }
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
             .subscribe { validationInput -> handleResult(validationInput) }

@@ -16,5 +16,11 @@ class MainActivity : AppCompatActivity() {
         nonreactive.setOnClickListener {
             startActivity(Intent(this, NonReactiveActivity::class.java))
         }
+        asyncreactive.setOnClickListener {
+            startActivity(Intent(this, AsyncReactiveActivity::class.java))
+        }
+        asyncnonreactive.setOnClickListener {
+            startActivity(Intent(this, AsyncNonReactiveActivity::class.java))
+        }
     }
 }
