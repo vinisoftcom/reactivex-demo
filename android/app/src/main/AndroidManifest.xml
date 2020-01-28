@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NonReactiveActivity"></activity>
+        <activity android:name=".SyncActivity"></activity>
+        <activity android:name=".NonReactiveActivity" />
         <activity android:name=".ReactiveActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

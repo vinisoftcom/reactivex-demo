@@ -3,5 +3,8 @@
     <string name="is_not_valid">Email is not valid</string>
     <string name="is_not_available">The email is already taken</string>
     <string name="is_ok">Email is valid and available</string>
-    <string name="reactive">Reative</string>
+    <string name="reactive">Reative sync</string>
+    <string name="nonreactive">Non reactive sync</string>
+    <string name="reactiveAsync">Reative async</string>
+    <string name="nonreactiveAcync">Non reactive async</string>
 </resources>

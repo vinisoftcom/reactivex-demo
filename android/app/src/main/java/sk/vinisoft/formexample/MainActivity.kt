@@ -13,5 +13,8 @@ class MainActivity : AppCompatActivity() {
         reactive.setOnClickListener {
             startActivity(Intent(this, ReactiveActivity::class.java))
         }
+        nonreactive.setOnClickListener {
+            startActivity(Intent(this, NonReactiveActivity::class.java))
+        }
     }
 }
