@@ -20,14 +20,14 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_update, container, false)
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         disposable = EMAIL_PUBLISHING_SUBJECT.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread())
             .subscribe { validationInput -> lastCheckedEmail.text = validationInput }
     }
 
-    override fun onPause() {
+    override fun onDestroyView() {
         disposable?.dispose()
-        super.onPause()
+        super.onDestroyView()
     }
 }
