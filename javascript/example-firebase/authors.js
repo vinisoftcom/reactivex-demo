@@ -10,6 +10,22 @@ class AuthorsStore {
     this.authors = {};
   }
 
+  /**
+   shareReplay({
+      bufferSize: 1,
+      refCount: true
+    }),
+   */
+
+
+
+
+
+
+
+
+
+
   findById(id) {
     if (!this.authors.hasOwnProperty(id)) {
       const documentRef = firebase.firestore()
@@ -17,16 +33,33 @@ class AuthorsStore {
 
       this.authors[id] = fromRef(documentRef).pipe(
         map(snap => snap.data()),
-        shareReplay({
-          bufferSize: 1,
-          refCount: true
-        }),
       );
     }
 
     return this.authors[id];
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }
 
 const Authors = new AuthorsStore();

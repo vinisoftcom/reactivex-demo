@@ -28,6 +28,12 @@ class ArticleStore {
 
   /**
    * Retrieve featured articles.
+   * 
+      // 2) Cache hodnoty
+      shareReplay({
+        bufferSize: 1,
+        refCount: true
+      }),
    */
   featured() {
     if (!this.$featured) {
@@ -35,16 +41,8 @@ class ArticleStore {
         .collection('featured_articles');
 
       this.$featured = fromRef(collectionRef).pipe(
-        flatMap(
-          snap => from(snap.docs).pipe(
-            map(doc => doc.data()),
-            toArray()
-          ),
-        ),
-        shareReplay({
-          bufferSize: 1,
-          refCount: true
-        }),
+        // 1) Konverzia poľa dokumentov na pole objektov
+        map(snap => snap.docs.map(doc => doc.data())),
       );
     }
 
