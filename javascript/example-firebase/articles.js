@@ -13,6 +13,9 @@ class ArticleStore {
     this.articles = {};
   }
 
+  /**
+   * Retrieve article by ID.
+   */
   findById(id) {
     if (!this.articles.hasOwnProperty(id)) {
       const documentRef = firebase.firestore()
@@ -28,12 +31,6 @@ class ArticleStore {
 
   /**
    * Retrieve featured articles.
-   * 
-      // 2) Cache hodnoty
-      shareReplay({
-        bufferSize: 1,
-        refCount: true
-      }),
    */
   featured() {
     if (!this.$featured) {
@@ -41,7 +38,6 @@ class ArticleStore {
         .collection('featured_articles');
 
       this.$featured = fromRef(collectionRef).pipe(
-        // 1) Konverzia poľa dokumentov na pole objektov
         map(snap => snap.docs.map(doc => doc.data())),
       );
     }

@@ -30,5 +30,6 @@ const router = new VueRouter({
   routes
 })
 
+Vue.config.productionTip = false
 Vue.use(VueRouter)
 new Vue({ router: router, render: createElement => createElement(App) }).$mount('#app');

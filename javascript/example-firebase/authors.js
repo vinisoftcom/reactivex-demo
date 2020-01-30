@@ -11,21 +11,8 @@ class AuthorsStore {
   }
 
   /**
-   shareReplay({
-      bufferSize: 1,
-      refCount: true
-    }),
+   * Find author by ID.
    */
-
-
-
-
-
-
-
-
-
-
   findById(id) {
     if (!this.authors.hasOwnProperty(id)) {
       const documentRef = firebase.firestore()
@@ -38,27 +25,6 @@ class AuthorsStore {
 
     return this.authors[id];
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 }
 
